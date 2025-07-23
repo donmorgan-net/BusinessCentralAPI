@@ -1,0 +1,19 @@
+name: Publish BusinessCentralApi
+
+on:
+    workflow_dispatch:
+        
+    push:
+        paths:
+            - 'Module/BusinessCentralApi/**'
+jobs:
+    build:
+      name: Publish
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - name: Publish
+          env:
+            APIKEY: ${{ secrets.POSH_GALLERY_API_KEY }}
+          run: ./.github/Publish.ps1 -TargetFolder "BusinessCentralApi"
+          shell: pwsh
